@@ -1,0 +1,31 @@
+﻿<Window x:Class="Rieltenek.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rieltenek"
+        mc:Ignorable="d"
+        Title="Риэлторское агенство" Height="700" Width="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="200*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="#DAE4E5" Orientation="Horizontal">
+            <Label Margin="5 0 0 0" HorizontalAlignment="Center"
+                   FontFamily="Tahoma" FontSize="42" >Rieltenek</Label>
+            <Button x:Name="btnBack" Click="btnBack_Click"
+                    Style="{StaticResource mainbtn}"
+                    Margin="290 0 0 0" >Назад</Button>
+            <Button x:Name="btnFaq" Click="btnFaq_Click"
+                    Style="{StaticResource mainbtn}"
+                    Margin="5 0 0 0" >FAQ</Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
+            <Image Source=".//Resourses/Logo.jpg"
+                   Opacity=".1"
+                   Width="490"/>
+        </StackPanel>
+        <Frame x:Name="FrmMain" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

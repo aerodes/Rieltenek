@@ -1,0 +1,54 @@
+﻿<Page x:Class="Rieltenek.Pages.PageClients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Rieltenek.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageClients">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Width="800"
+                    Height="Auto">
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <TextBlock Text="ФИО"
+                           Style="{StaticResource mainTxtb}"
+                           Width="50"/>
+                <TextBox  Name="Name"
+                           Style="{StaticResource mainTxt}"/>
+                <TextBlock Text="Активность"
+                           Style="{StaticResource mainTxtb}"
+                           Width="90"
+                           Margin="50 0 0 0"/>
+                <ComboBox Name="CmbxType"
+                        Style="{StaticResource mainCmbbx}">
+                    <ComboBoxItem Content="В поиске" IsSelected="True"/>
+                    <ComboBoxItem Content="Не нуждается"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <Button Name="btnCreateClient" Content="Создать клиента" Style="{StaticResource mainbtn}" Click="btnCreateClient_Click"/>
+                <Button Name="btnUpdateClient" Content="Редактировать" Style="{StaticResource mainbtn}" Click="btnUpdateClient_Click"/>
+            </StackPanel>
+            <ScrollViewer Margin="0 20 0 0">
+                <ListView x:Name="ListClients">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=id_client}" Width="Auto">ID</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=for_name}" Width="Auto">Фамилия</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto">Имя</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=last_name}" Width="Auto">Отчество</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=connection}" Width="Auto">Контакты</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=active}" Width="Auto">Активность</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=id_need}" Width="Auto">Номер потреб.</GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Page>

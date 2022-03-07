@@ -1,0 +1,86 @@
+﻿<Page x:Class="Rieltenek.Pages.PageRealtors"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Rieltenek.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageRealtors">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Поиск"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="Search"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Фамилия"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="For_name"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Имя"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="Name"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Отчество"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="Last_name"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Ставка"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="Coefficient"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Кол-во сделок"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="Amount_of_deals"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Клиенты"
+                               Style="{StaticResource mainTxtb}"/>
+                    <TextBox  Name="Id_clients"
+                             Style="{StaticResource mainTxt}"/>
+                </StackPanel>
+                <Button Name="BtnUpdate"
+                        Content="Редактировать"
+                        Style="{StaticResource mainbtn}" 
+                        Click="BtnUpdate_Click"/>
+                <Button Name="BtnCreate"
+                        Content="Создать"
+                        Style="{StaticResource mainbtn}" 
+                        Click="BtnCreate_Click"/>
+            </StackPanel>
+            <ScrollViewer Margin="20 0 0 0">
+                <ListView x:Name="ListRealtors" SelectionChanged="ListRealtors_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=id_realtor}" Width="Auto">ID</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=for_name}" Width="Auto">Фамилия</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=name}" Width="Auto">Имя</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=last_name}" Width="Auto">Отчество</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=coefficient}" Width="Auto">Ставка</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=amount_of_deals}" Width="Auto">Кол-во сделок</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=id_clients}" Width="Auto">Клиенты</GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Page>
