@@ -21,5 +21,8 @@ namespace Rieltenek.ConnectBD
         public Nullable<int> floor_number { get; set; }
         public decimal price { get; set; }
         public double area { get; set; }
+        public Nullable<int> id_photo { get; set; }
+    
+        public virtual Photo Photo { get; set; }
     }
 }

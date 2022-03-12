@@ -96,6 +96,9 @@
     <Compile Include="ConnectBD\Need.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConnectBD\Photo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ConnectBD\Property.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -118,6 +121,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PageCreateClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageCreateNeed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageCreateProperty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageCreateRealtor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +164,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PageUpdateRealtor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PageViewProperty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\PageClients.xaml.cs">
@@ -159,6 +182,15 @@
     </Compile>
     <Compile Include="Pages\PageCreateClient.xaml.cs">
       <DependentUpon>PageCreateClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageCreateNeed.xaml.cs">
+      <DependentUpon>PageCreateNeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageCreateProperty.xaml.cs">
+      <DependentUpon>PageCreateProperty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageCreateRealtor.xaml.cs">
+      <DependentUpon>PageCreateRealtor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PageMain.xaml.cs">
       <DependentUpon>PageMain.xaml</DependentUpon>
@@ -180,6 +212,12 @@
     </Compile>
     <Compile Include="Pages\PageUpdateProperty.xaml.cs">
       <DependentUpon>PageUpdateProperty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageUpdateRealtor.xaml.cs">
+      <DependentUpon>PageUpdateRealtor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PageViewProperty.xaml.cs">
+      <DependentUpon>PageViewProperty.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

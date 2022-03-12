@@ -27,6 +27,7 @@ namespace Rieltenek.ConnectBD
     
         public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Need> Need { get; set; }
+        public virtual DbSet<Photo> Photo { get; set; }
         public virtual DbSet<Property> Property { get; set; }
         public virtual DbSet<Realtor> Realtor { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

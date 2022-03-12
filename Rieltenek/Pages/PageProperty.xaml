@@ -9,70 +9,26 @@
       Title="PageProperty">
 
     <Grid>
-        <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Vertical"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <StackPanel HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Площадь"
-                               Style="{StaticResource mainTxtb}"/>
-                    <TextBox  Name="Area"
-                             Style="{StaticResource mainTxt}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Стоимость"
-                               Style="{StaticResource mainTxtb}"/>
-                    <TextBox  Name="Price"
-                             Style="{StaticResource mainTxt}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Кол-во комнат"
-                               Style="{StaticResource mainTxtb}"/>
-                    <TextBox  Name="Number_of_rooms"
-                             Style="{StaticResource mainTxt}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Кол-во этажей"
-                               Style="{StaticResource mainTxtb}"/>
-                    <TextBox  Name="Number_of_floors"
-                             Style="{StaticResource mainTxt}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Номер этажа"
-                               Style="{StaticResource mainTxtb}"/>
-                    <TextBox  Name="Floor_number"
-                             Style="{StaticResource mainTxt}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Вид"
-                               Style="{StaticResource mainTxtb}"/>
-                    <ComboBox Name="CmbxType"
-                        Style="{StaticResource mainCmbbx}">
-                        <ComboBoxItem Content="Квартира" IsSelected="True"/>
-                        <ComboBoxItem Content="Дом"/>
-                    </ComboBox>
-                </StackPanel>
-                <Button Name="BtnUpdate"
-                        Content="Редактировать"
-                        Style="{StaticResource mainbtn}" 
-                        Click="BtnUpdate_Click"/>
-                <Button Name="BtnCreate"
-                        Content="Создать"
-                        Style="{StaticResource mainbtn}" 
-                        Click="BtnSave_Click"/>
+                    VerticalAlignment="Top"
+                    Width="800"
+                    Height="Auto">
+            <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                <Button Name="btnCreateProperty" Content="Создать" Style="{StaticResource mainbtn}" Click="btnCreateProperty_Click"/>
+                <Button Name="btnUpdateProperty" Content="Редактировать" Style="{StaticResource mainbtn}" Click="btnUpdateProperty_Click"/>
             </StackPanel>
-            <ScrollViewer Margin="20 0 0 0">
+            <ScrollViewer Margin="0 20 0 0">
                 <ListView x:Name="ListProperty">
                     <ListView.View>
                         <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=id_property}" Width="Auto">ID</GridViewColumn>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=area}" Width="Auto">Площадь</GridViewColumn>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=price}" Width="Auto">Цена</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=number_of_rooms}" Width="Auto">Комнат</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=number_of_floors}" Width="Auto">Этажей</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=number_of_rooms}" Width="Auto">Кол-во комнат</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=number_of_floors}" Width="Auto">Кол-во этажей</GridViewColumn>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=floor_number}" Width="Auto">Этаж</GridViewColumn>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=type_property}" Width="Auto">Вид</GridViewColumn>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=type_property}" Width="Auto">Тип недвижимости</GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

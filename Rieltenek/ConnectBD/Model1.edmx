@@ -29,6 +29,22 @@
           <Property Name="floor_number" Type="int" />
           <Property Name="type_property" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="id_photo" />
+          </Key>
+          <Property Name="id_photo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="photo_1" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_2" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_3" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_4" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_5" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_6" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_7" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_8" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_9" Type="nvarchar" MaxLength="150" />
+          <Property Name="photo_10" Type="nvarchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="Property">
           <Key>
             <PropertyRef Name="id_property" />
@@ -40,6 +56,7 @@
           <Property Name="floor_number" Type="int" />
           <Property Name="price" Type="money" Nullable="false" />
           <Property Name="area" Type="float" Nullable="false" />
+          <Property Name="id_photo" Type="int" />
         </EntityType>
         <EntityType Name="Realtor">
           <Key>
@@ -75,6 +92,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Property_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="id_photo" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="id_photo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Realtor_Client">
           <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
           <End Role="Realtor" Type="Self.Realtor" Multiplicity="*" />
@@ -90,12 +119,17 @@
         <EntityContainer Name="Хранилище ReltorsAgencyModelContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Need" EntityType="Self.Need" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Realtor" EntityType="Self.Realtor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Client_Need" Association="Self.FK_Client_Need">
             <End Role="Need" EntitySet="Need" />
             <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Property_Photo" Association="Self.FK_Property_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Property" EntitySet="Property" />
           </AssociationSet>
           <AssociationSet Name="FK_Realtor_Client" Association="Self.FK_Realtor_Client">
             <End Role="Client" EntitySet="Client" />
@@ -134,6 +168,23 @@
           <Property Name="type_property" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="Self.FK_Client_Need" FromRole="Need" ToRole="Client" />
         </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="id_photo" />
+          </Key>
+          <Property Name="id_photo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="photo_1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_3" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_4" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_5" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_6" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_7" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_8" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_9" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="photo_10" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Property" Relationship="Self.FK_Property_Photo" FromRole="Photo" ToRole="Property" />
+        </EntityType>
         <EntityType Name="Property">
           <Key>
             <PropertyRef Name="id_property" />
@@ -145,6 +196,8 @@
           <Property Name="floor_number" Type="Int32" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="area" Type="Double" Nullable="false" />
+          <Property Name="id_photo" Type="Int32" />
+          <NavigationProperty Name="Photo" Relationship="Self.FK_Property_Photo" FromRole="Property" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Realtor">
           <Key>
@@ -193,9 +246,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Property_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+          <End Role="Property" Type="Self.Property" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="id_photo" />
+            </Principal>
+            <Dependent Role="Property">
+              <PropertyRef Name="id_photo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ReltorsAgencyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Need" EntityType="Self.Need" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" />
           <EntitySet Name="Property" EntityType="Self.Property" />
           <EntitySet Name="Realtor" EntityType="Self.Realtor" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
@@ -206,6 +272,10 @@
           <AssociationSet Name="FK_Realtor_Client" Association="Self.FK_Realtor_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Realtor" EntitySet="Realtor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Property_Photo" Association="Self.FK_Property_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Property" EntitySet="Property" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -240,6 +310,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Photo">
+            <EntityTypeMapping TypeName="ReltorsAgencyModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="id_photo" ColumnName="id_photo" />
+                <ScalarProperty Name="photo_1" ColumnName="photo_1" />
+                <ScalarProperty Name="photo_2" ColumnName="photo_2" />
+                <ScalarProperty Name="photo_3" ColumnName="photo_3" />
+                <ScalarProperty Name="photo_4" ColumnName="photo_4" />
+                <ScalarProperty Name="photo_5" ColumnName="photo_5" />
+                <ScalarProperty Name="photo_6" ColumnName="photo_6" />
+                <ScalarProperty Name="photo_7" ColumnName="photo_7" />
+                <ScalarProperty Name="photo_8" ColumnName="photo_8" />
+                <ScalarProperty Name="photo_9" ColumnName="photo_9" />
+                <ScalarProperty Name="photo_10" ColumnName="photo_10" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Property">
             <EntityTypeMapping TypeName="ReltorsAgencyModel.Property">
               <MappingFragment StoreEntitySet="Property">
@@ -250,6 +337,7 @@
                 <ScalarProperty Name="floor_number" ColumnName="floor_number" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="id_photo" ColumnName="id_photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
