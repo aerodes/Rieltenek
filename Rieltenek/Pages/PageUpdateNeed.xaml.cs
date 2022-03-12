@@ -37,23 +37,47 @@ namespace Rieltenek.Pages
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
+            string FNstr = Floor_number.Text;
+            if (FNstr != "")
+            {
+                IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
                 Select(x =>
                 {
                     x.area = Convert.ToDouble(Area.Text);
                     x.price_MAX = Convert.ToDecimal(Price.Text);
                     x.number_of_rooms = Convert.ToInt32(Number_of_rooms.Text);
                     x.number_of_floors = Convert.ToInt32(Number_of_floors.Text);
-                    x.floor_number = Convert.ToInt32(Floor_number.Text);
+                    x.floor_number = Convert.ToInt32(FNstr);
                     x.type_property = CmbxType.Text;
                     return x;
                 });
-            foreach(Need nd in needs)
-            {
-                ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
+                foreach (Need nd in needs)
+                {
+                    ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
+                }
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
+                Select(x =>
+                {
+                    x.area = Convert.ToDouble(Area.Text);
+                    x.price_MAX = Convert.ToDecimal(Price.Text);
+                    x.number_of_rooms = Convert.ToInt32(Number_of_rooms.Text);
+                    x.number_of_floors = Convert.ToInt32(Number_of_floors.Text);
+                    x.floor_number = null;
+                    x.type_property = CmbxType.Text;
+                    return x;
+                });
+                foreach (Need nd in needs)
+                {
+                    ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
+                }
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

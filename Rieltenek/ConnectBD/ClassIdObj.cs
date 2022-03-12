@@ -12,5 +12,6 @@ namespace Rieltenek.ConnectBD
         public static int Id_realtor { get; set; }
         public static int Id_property { get; set; }
         public static int Id_need { get; set; }
+        public static int LastNeed { get; set; }
     }
 }

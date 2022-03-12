@@ -25,6 +25,7 @@ namespace Rieltenek.Pages
         public PageCreateClient()
         {
             InitializeComponent();
+            lblLastNeed.Content = ClassIdObj.LastNeed;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

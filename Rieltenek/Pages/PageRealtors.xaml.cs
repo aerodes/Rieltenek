@@ -43,7 +43,24 @@ namespace Rieltenek.Pages
 
         private void BtnCreate_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string IdCl = Id_clients.Text;
+            if (IdCl == "")
+            {
+                Realtor  realtor = new Realtor()
+                {
+                    for_name = For_name.Text,
+                    name = Name.Text,
+                    last_name = Last_name.Text,
+                    coefficient = Convert.ToDouble(Coefficient.Text),
+                    amount_of_deals = Convert.ToInt32(Amount_of_deals.Text),
+                    id_clients = null
+                };
+
+                ConnectOdb.conObj.Realtor.Add(realtor);
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
             {
                 Realtor realtor = new Realtor()
                 {
@@ -52,23 +69,45 @@ namespace Rieltenek.Pages
                     last_name = Last_name.Text,
                     coefficient = Convert.ToDouble(Coefficient.Text),
                     amount_of_deals = Convert.ToInt32(Amount_of_deals.Text),
-                    id_clients = Convert.ToInt32(Id_clients.Text)
+                    id_clients = Convert.ToInt32(IdCl)
                 };
 
                 ConnectOdb.conObj.Realtor.Add(realtor);
                 ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Риэлтор добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch(SqlException ex)
-            {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show("Данные добавлены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
-                 Select(x => 
+            string IdCl = Id_clients.Text;
+
+            if (IdCl == "")
+            {
+                IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
+                 Select(x =>
+                 {
+                     x.for_name = For_name.Text;
+                     x.name = Name.Text;
+                     x.last_name = Last_name.Text;
+                     x.coefficient = Convert.ToDouble(Coefficient.Text);
+                     x.amount_of_deals = Convert.ToInt32(Amount_of_deals.Text);
+                     x.id_clients = null;
+                     return x;
+                 });
+
+                foreach (Realtor rltr in realtors)
+                {
+                    ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
+                }
+
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
+                 Select(x =>
                  {
                      x.for_name = For_name.Text;
                      x.name = Name.Text;
@@ -79,13 +118,15 @@ namespace Rieltenek.Pages
                      return x;
                  });
 
-            foreach(Realtor rltr in realtors)
-            {
-                ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
-            }
+                foreach (Realtor rltr in realtors)
+                {
+                    ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
+                }
 
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            
         }
 
         private void ListRealtors_SelectionChanged(object sender, SelectionChangedEventArgs e)

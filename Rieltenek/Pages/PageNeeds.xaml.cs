@@ -54,6 +54,8 @@ namespace Rieltenek.Pages
             ConnectOdb.conObj.Need.Add(need);
             ConnectOdb.conObj.SaveChanges();
             MessageBox.Show("Потребность добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            ClassIdObj.LastNeed = need.id_need;
         }
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)

@@ -41,12 +41,17 @@
                            Style="{StaticResource mainTxtb}"/>
                 <TextBox  Name="Id_need"
                          Style="{StaticResource mainTxt}"/>
+                <Label Content="Последняя созданная: "
+                       FontFamily="Tahoma"
+                       FontSize="17"/>
+                <Label Name="lblLastNeed" FontFamily="Tahoma"
+                       FontSize="17"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Активность"
                            Style="{StaticResource mainTxtb}"/>
                 <ComboBox Name="CmbxType"
-                    Style="{StaticResource mainCmbbx}">
+                    Style="{StaticResource mainCmbbx}" Width="150">
                     <ComboBoxItem Content="В поиске" IsSelected="True"/>
                     <ComboBoxItem Content="Не нуждается"/>
                 </ComboBox>

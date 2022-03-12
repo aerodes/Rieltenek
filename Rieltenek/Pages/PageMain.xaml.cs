@@ -45,15 +45,10 @@ namespace Rieltenek.Pages
 
         }
 
-        private void btnCreateNeed_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void btnCreateClient_Click(object sender, RoutedEventArgs e)
         {
             FrameObj.frameMain.Navigate(new PageCreateClient());
-
         }
 
         private void btnComparison_Click(object sender, RoutedEventArgs e)

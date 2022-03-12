@@ -58,7 +58,7 @@
                              Style="{StaticResource mainTxt}"/>
                 </StackPanel>
                 <Button Name="BtnUpdate"
-                        Content="Редактировать"
+                        Content="Сохранить"
                         Style="{StaticResource mainbtn}" 
                         Click="BtnUpdate_Click"/>
                 <Button Name="BtnCreate"

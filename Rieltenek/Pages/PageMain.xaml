@@ -13,9 +13,9 @@
                     VerticalAlignment="Center"
                     Orientation="Horizontal">
             <StackPanel Orientation="Vertical">
+                <Button Name="btnNeeds" Content="Потребности" Style="{StaticResource mainbtn}" Click="btnNeeds_Click"/>
                 <Button Name="btnCreateClient" Content="Создать клиента" Style="{StaticResource mainbtn}" Click="btnCreateClient_Click"/>
                 <Button Name="btnComparison" Content="Сопоставить" Style="{StaticResource mainbtn}" Click="btnComparison_Click"/>
-                <Button Name="btnNeeds" Content="Потребности" Style="{StaticResource mainbtn}" Click="btnNeeds_Click"/>
                 <Button Name="btnClients" Content="Клиенты" Style="{StaticResource mainbtn}" Click="btnClients_Click"/>
                 <Button Name="btnProperty" Content="Недвижимость" Style="{StaticResource mainbtn}" Click="btnProperty_Click"/>
                 <Button Name="btnRealtor" Content="Риэлторы" Style="{StaticResource mainbtn}" Click="btnRealtor_Click"/>
