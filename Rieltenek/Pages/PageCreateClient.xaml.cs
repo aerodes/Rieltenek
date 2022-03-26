@@ -30,19 +30,26 @@ namespace Rieltenek.Pages
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            Client client = new Client()
+            if ((For_name.Text != "") && (Name.Text != "") && (Last_name.Text != "") && (Connection.Text != "") && Id_need.Text != "")
             {
-                for_name = For_name.Text,
-                name = Name.Text,
-                last_name = Last_name.Text,
-                connection = Connection.Text,
-                id_need = Convert.ToInt32(Id_need.Text),
-                active = CmbxType.Text
-            };
+                Client client = new Client()
+                {
+                    for_name = For_name.Text,
+                    name = Name.Text,
+                    last_name = Last_name.Text,
+                    connection = Connection.Text,
+                    id_need = Convert.ToInt32(Id_need.Text),
+                    active = CmbxType.Text
+                };
 
-            ConnectOdb.conObj.Client.Add(client);
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Клиент добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                ConnectOdb.conObj.Client.Add(client);
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Клиент добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

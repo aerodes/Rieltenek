@@ -269,6 +269,17 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="unknown.png" />
+    <Resource Include="ImageProperty\1.jpg" />
+    <Resource Include="ImageProperty\2.jpg" />
+    <Resource Include="ImageProperty\3.jpg" />
+    <Resource Include="ImageProperty\4.jpg" />
+    <Resource Include="ImageProperty\5.jpg" />
+    <Resource Include="ImageProperty\6.jpg" />
+    <Resource Include="ImageProperty\7.jpg" />
+    <Resource Include="ImageProperty\8.jpg" />
+    <Resource Include="ImageProperty\9.jpeg" />
+    <Resource Include="ImageProperty\10.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

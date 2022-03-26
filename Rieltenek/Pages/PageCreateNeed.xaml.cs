@@ -30,23 +30,30 @@ namespace Rieltenek.Pages
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            Need need = new Need()
+            if ((Area.Text != "")&& (Price_MAX.Text != "") && (Number_of_rooms.Text != "") && (Number_of_floors.Text != "") && (Floor_number.Text != ""))
             {
-                area = Convert.ToInt32(Area.Text),
-                price_MAX = Convert.ToDecimal(Price_MAX.Text),
-                number_of_rooms = Convert.ToInt32(Number_of_rooms.Text),
-                number_of_floors = Convert.ToInt32(Number_of_floors.Text),
-                floor_number = Convert.ToInt32(Floor_number.Text),
-                type_property = CmbxType.Text
-            };
+                Need need = new Need()
+                {
+                    area = Convert.ToInt32(Area.Text),
+                    price_MAX = Convert.ToDecimal(Price_MAX.Text),
+                    number_of_rooms = Convert.ToInt32(Number_of_rooms.Text),
+                    number_of_floors = Convert.ToInt32(Number_of_floors.Text),
+                    floor_number = Convert.ToInt32(Floor_number.Text),
+                    type_property = CmbxType.Text
+                };
 
-            ConnectOdb.conObj.Need.Add(need);
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Потребность добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                ConnectOdb.conObj.Need.Add(need);
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Потребность добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            ClassIdObj.LastNeed = need.id_need;
+                ClassIdObj.LastNeed = need.id_need;
 
-            FrameObj.frameMain.GoBack(); 
+                FrameObj.frameMain.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

@@ -29,22 +29,29 @@ namespace Rieltenek.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Property property = new Property()
+            if ((Area.Text != "") && (Price.Text != "") && (Number_of_rooms.Text != "") && (Number_of_floors.Text != "") && (Floor_number.Text != ""))
             {
-                area = Convert.ToDouble(Area.Text),
-                number_of_rooms = Convert.ToInt32(Number_of_rooms.Text),
-                number_of_floors = Convert.ToInt32(Number_of_floors.Text),
-                floor_number = Convert.ToInt32(Floor_number.Text),
-                price = Convert.ToDecimal(Price.Text),
-                type_property = CmbxType.Text
+                Property property = new Property()
+                {
+                    area = Convert.ToDouble(Area.Text),
+                    number_of_rooms = Convert.ToInt32(Number_of_rooms.Text),
+                    number_of_floors = Convert.ToInt32(Number_of_floors.Text),
+                    floor_number = Convert.ToInt32(Floor_number.Text),
+                    price = Convert.ToDecimal(Price.Text),
+                    type_property = CmbxType.Text
 
-            };
+                };
 
-            ConnectOdb.conObj.Property.Add(property);
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Недвижимость добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                ConnectOdb.conObj.Property.Add(property);
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Недвижимость добавлена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            FrameObj.frameMain.GoBack();
+                FrameObj.frameMain.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

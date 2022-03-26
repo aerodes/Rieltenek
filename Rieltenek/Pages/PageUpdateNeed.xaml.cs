@@ -28,7 +28,7 @@ namespace Rieltenek.Pages
             InitializeComponent();
 
             Area.Text = Convert.ToString(need.area);
-            Price.Text = Convert.ToString(need.price_MAX);
+            Price_MAX.Text = Convert.ToString(need.price_MAX);
             Number_of_rooms.Text = Convert.ToString(need.number_of_rooms);
             Number_of_floors.Text = Convert.ToString(need.number_of_floors);
             Floor_number.Text = Convert.ToString(need.floor_number);
@@ -37,46 +37,53 @@ namespace Rieltenek.Pages
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            string FNstr = Floor_number.Text;
-            if (FNstr != "")
+            if ((Area.Text != "") && (Price_MAX.Text != "") && (Number_of_rooms.Text != "") && (Number_of_floors.Text != ""))
             {
-                IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
-                Select(x =>
+                string FNstr = Floor_number.Text;
+                if (FNstr != "")
                 {
-                    x.area = Convert.ToDouble(Area.Text);
-                    x.price_MAX = Convert.ToDecimal(Price.Text);
-                    x.number_of_rooms = Convert.ToInt32(Number_of_rooms.Text);
-                    x.number_of_floors = Convert.ToInt32(Number_of_floors.Text);
-                    x.floor_number = Convert.ToInt32(FNstr);
-                    x.type_property = CmbxType.Text;
-                    return x;
-                });
-                foreach (Need nd in needs)
-                {
-                    ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
+                    IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
+                    Select(x =>
+                    {
+                        x.area = Convert.ToDouble(Area.Text);
+                        x.price_MAX = Convert.ToDecimal(Price_MAX.Text);
+                        x.number_of_rooms = Convert.ToInt32(Number_of_rooms.Text);
+                        x.number_of_floors = Convert.ToInt32(Number_of_floors.Text);
+                        x.floor_number = Convert.ToInt32(FNstr);
+                        x.type_property = CmbxType.Text;
+                        return x;
+                    });
+                    foreach (Need nd in needs)
+                    {
+                        ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    ConnectOdb.conObj.SaveChanges();
+                    MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                {
+                    IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
+                    Select(x =>
+                    {
+                        x.area = Convert.ToDouble(Area.Text);
+                        x.price_MAX = Convert.ToDecimal(Price_MAX.Text);
+                        x.number_of_rooms = Convert.ToInt32(Number_of_rooms.Text);
+                        x.number_of_floors = Convert.ToInt32(Number_of_floors.Text);
+                        x.floor_number = null;
+                        x.type_property = CmbxType.Text;
+                        return x;
+                    });
+                    foreach (Need nd in needs)
+                    {
+                        ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    ConnectOdb.conObj.SaveChanges();
+                    MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             else
             {
-                IEnumerable<Need> needs = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).AsEnumerable().
-                Select(x =>
-                {
-                    x.area = Convert.ToDouble(Area.Text);
-                    x.price_MAX = Convert.ToDecimal(Price.Text);
-                    x.number_of_rooms = Convert.ToInt32(Number_of_rooms.Text);
-                    x.number_of_floors = Convert.ToInt32(Number_of_floors.Text);
-                    x.floor_number = null;
-                    x.type_property = CmbxType.Text;
-                    return x;
-                });
-                foreach (Need nd in needs)
-                {
-                    ConnectOdb.conObj.Entry(nd).State = System.Data.Entity.EntityState.Modified;
-                }
-                ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Потребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

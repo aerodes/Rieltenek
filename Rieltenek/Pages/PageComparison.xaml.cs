@@ -44,12 +44,19 @@ namespace Rieltenek.Pages
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((Client)ListClient.SelectedItem).id_need;
+            if (ListClient.SelectedItem != null)
+            {
+                int id = ((Client)ListClient.SelectedItem).id_need;
 
-            Need need = ConnectOdb.conObj.Need.Where(c => c.id_need == id).FirstOrDefault();
+                Need need = ConnectOdb.conObj.Need.Where(c => c.id_need == id).FirstOrDefault();
 
-            var Property = ConnectOdb.conObj.Property.ToList();
-            ListProperty.ItemsSource = Property.Where(x => x.price <= need.price_MAX);
+                var Property = ConnectOdb.conObj.Property.ToList();
+                ListProperty.ItemsSource = Property.Where(x => x.price <= need.price_MAX);
+            }
+            else
+            {
+                MessageBox.Show("Выберите клиента!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

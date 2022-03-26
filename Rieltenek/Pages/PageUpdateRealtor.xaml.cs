@@ -36,55 +36,62 @@ namespace Rieltenek.Pages
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            string IdCl = Id_clients.Text;
-
-            if (IdCl == "")
+            if ((For_name.Text != "") && (Name.Text != "") && (Last_name.Text != "") && (Coefficient.Text != "") && (Amount_of_deals.Text != ""))
             {
-                IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
-                 Select(x =>
-                 {
-                     x.for_name = For_name.Text;
-                     x.name = Name.Text;
-                     x.last_name = Last_name.Text;
-                     x.coefficient = Convert.ToDouble(Coefficient.Text);
-                     x.amount_of_deals = Convert.ToInt32(Amount_of_deals.Text);
-                     x.id_clients = null;
-                     return x;
-                 });
+                string IdCl = Id_clients.Text;
 
-                foreach (Realtor rltr in realtors)
+                if (IdCl == "")
                 {
-                    ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
+                    IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
+                     Select(x =>
+                     {
+                         x.for_name = For_name.Text;
+                         x.name = Name.Text;
+                         x.last_name = Last_name.Text;
+                         x.coefficient = Convert.ToDouble(Coefficient.Text);
+                         x.amount_of_deals = Convert.ToInt32(Amount_of_deals.Text);
+                         x.id_clients = null;
+                         return x;
+                     });
+
+                    foreach (Realtor rltr in realtors)
+                    {
+                        ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
+                    }
+
+                    ConnectOdb.conObj.SaveChanges();
+                    MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    FrameObj.frameMain.GoBack();
                 }
+                else
+                {
+                    IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
+                     Select(x =>
+                     {
+                         x.for_name = For_name.Text;
+                         x.name = Name.Text;
+                         x.last_name = Last_name.Text;
+                         x.coefficient = Convert.ToDouble(Coefficient.Text);
+                         x.amount_of_deals = Convert.ToInt32(Amount_of_deals.Text);
+                         x.id_clients = Convert.ToInt32(Id_clients.Text);
+                         return x;
+                     });
 
-                ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    foreach (Realtor rltr in realtors)
+                    {
+                        ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
+                    }
 
-                FrameObj.frameMain.GoBack();
+                    ConnectOdb.conObj.SaveChanges();
+                    MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    FrameObj.frameMain.GoBack();
+                }
             }
             else
             {
-                IEnumerable<Realtor> realtors = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == ClassIdObj.Id_realtor).AsEnumerable().
-                 Select(x =>
-                 {
-                     x.for_name = For_name.Text;
-                     x.name = Name.Text;
-                     x.last_name = Last_name.Text;
-                     x.coefficient = Convert.ToDouble(Coefficient.Text);
-                     x.amount_of_deals = Convert.ToInt32(Amount_of_deals.Text);
-                     x.id_clients = Convert.ToInt32(Id_clients.Text);
-                     return x;
-                 });
-
-                foreach (Realtor rltr in realtors)
-                {
-                    ConnectOdb.conObj.Entry(rltr).State = System.Data.Entity.EntityState.Modified;
-                }
-
-                ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                FrameObj.frameMain.GoBack();
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

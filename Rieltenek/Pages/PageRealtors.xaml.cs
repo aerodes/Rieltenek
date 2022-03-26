@@ -48,9 +48,16 @@ namespace Rieltenek.Pages
 
         private void btnUpdateRealtor_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((Realtor)ListRealtors.SelectedItem).id_realtor;
-            Realtor realtor = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == id).FirstOrDefault();
-            FrameObj.frameMain.Navigate(new PageUpdateRealtor(realtor));
+            if (ListRealtors.SelectedValue != null)
+            {
+                int id = ((Realtor)ListRealtors.SelectedItem).id_realtor;
+                Realtor realtor = ConnectOdb.conObj.Realtor.Where(x => x.id_realtor == id).FirstOrDefault();
+                FrameObj.frameMain.Navigate(new PageUpdateRealtor(realtor));
+            }
+            else
+            {
+                MessageBox.Show("Выберите риэлтора!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

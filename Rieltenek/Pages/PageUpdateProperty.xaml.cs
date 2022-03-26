@@ -37,7 +37,9 @@ namespace Rieltenek.Pages
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Property> properties = ConnectOdb.conObj.Property.Where(x => x.id_property == ClassIdObj.Id_property).AsEnumerable().
+            if ((Area.Text != "") && (Price.Text != "") && (Number_of_rooms.Text != "") && (Number_of_floors.Text != "") && (Floor_number.Text != ""))
+            {
+                IEnumerable<Property> properties = ConnectOdb.conObj.Property.Where(x => x.id_property == ClassIdObj.Id_property).AsEnumerable().
                 Select(x =>
                 {
                     x.area = Convert.ToDouble(Area.Text);
@@ -48,12 +50,17 @@ namespace Rieltenek.Pages
                     x.type_property = CmbxType.Text;
                     return x;
                 });
-            foreach(Property prprt in properties)
-            {
-                ConnectOdb.conObj.Entry(prprt).State = System.Data.Entity.EntityState.Modified;
+                foreach (Property prprt in properties)
+                {
+                    ConnectOdb.conObj.Entry(prprt).State = System.Data.Entity.EntityState.Modified;
+                }
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Протребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Протребность изменена", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

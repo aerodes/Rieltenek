@@ -21,7 +21,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Стоимость"
                                Style="{StaticResource mainTxtb}"/>
-                <TextBox  Name="Price"
+                <TextBox  Name="Price_MAX"
                              Style="{StaticResource mainTxt}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">

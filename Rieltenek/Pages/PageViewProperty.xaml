@@ -11,14 +11,16 @@
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-            <Image Name="phtProperty" Width="300" Height="250"/>
+            <Label Name="StringImage" Foreground="Transparent" />
+            <Image Name="phtProperty" Width="300" Height="250" Stretch="UniformToFill"
+                   Source="{Binding Path=Content, ElementName=StringImage}"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Width="300">
                 <Button Name="btnBackPhoto" Content="Назад" Width="150"
                         Background="Transparent"
-                        FontFamily="Tahoma" FontSize="17"/>
+                        FontFamily="Tahoma" FontSize="17" Click="btnBackPhoto_Click"/>
                 <Button Name="btnNextPhoto" Content="Вперед" Width="150"
                         Background="Transparent"
-                        FontFamily="Tahoma" FontSize="17"/>
+                        FontFamily="Tahoma" FontSize="17" Click="btnNextPhoto_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Width="600">
                 <StackPanel Orientation="Vertical" Width="200">

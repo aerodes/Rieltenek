@@ -36,24 +36,31 @@ namespace Rieltenek.Pages
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            IEnumerable<Client> clients = ConnectOdb.conObj.Client.Where(x => x.id_client == ClassIdObj.Id_client).AsEnumerable().
-                Select(x =>
-                {
-                    x.for_name = For_name.Text;
-                    x.name = Name.Text;
-                    x.last_name = Last_name.Text;
-                    x.connection = Connection.Text;
-                    x.id_need = Convert.ToInt32(Id_need.Text);
-                    x.active = CmbxType.Text;
-                    return x;
-                });
-
-            foreach (Client clnt in clients)
+            if ((For_name.Text != "") && (Name.Text != "") && (Last_name.Text != "") && (Connection.Text != "") && Id_need.Text != "")
             {
-                ConnectOdb.conObj.Entry(clnt).State = System.Data.Entity.EntityState.Modified;
+                IEnumerable<Client> clients = ConnectOdb.conObj.Client.Where(x => x.id_client == ClassIdObj.Id_client).AsEnumerable().
+               Select(x =>
+               {
+                   x.for_name = For_name.Text;
+                   x.name = Name.Text;
+                   x.last_name = Last_name.Text;
+                   x.connection = Connection.Text;
+                   x.id_need = Convert.ToInt32(Id_need.Text);
+                   x.active = CmbxType.Text;
+                   return x;
+               });
+
+                foreach (Client clnt in clients)
+                {
+                    ConnectOdb.conObj.Entry(clnt).State = System.Data.Entity.EntityState.Modified;
+                }
+                ConnectOdb.conObj.SaveChanges();
+                MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            ConnectOdb.conObj.SaveChanges();
-            MessageBox.Show("Данные изменены", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

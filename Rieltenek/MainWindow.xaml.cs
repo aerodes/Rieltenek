@@ -34,7 +34,14 @@ namespace Rieltenek
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            FrameObj.frameMain.GoBack();
+            try
+            {
+                FrameObj.frameMain.GoBack();
+            }
+            catch
+            {
+                FrameObj.frameMain.Navigate(new PageMain());
+            }
         }
 
         private void btnFaq_Click(object sender, RoutedEventArgs e)

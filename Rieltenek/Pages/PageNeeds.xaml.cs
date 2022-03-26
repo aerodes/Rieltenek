@@ -46,10 +46,17 @@ namespace Rieltenek.Pages
 
         private void btnUpdateNeed_Click(object sender, RoutedEventArgs e)
         {
-            ClassIdObj.Id_need = ((Need)ListNeeds.SelectedItem).id_need;
-            Need need = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).FirstOrDefault();
+            if (ListNeeds.SelectedValue != null)
+            {
+                ClassIdObj.Id_need = ((Need)ListNeeds.SelectedItem).id_need;
+                Need need = ConnectOdb.conObj.Need.Where(x => x.id_need == ClassIdObj.Id_need).FirstOrDefault();
 
-            FrameObj.frameMain.Navigate(new PageUpdateNeed(need));
+                FrameObj.frameMain.Navigate(new PageUpdateNeed(need));
+            }
+            else
+            {
+                MessageBox.Show("Выберите потребность!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

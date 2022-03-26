@@ -29,42 +29,49 @@ namespace Rieltenek.Pages
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            string IdCl = Id_clients.Text;
-            if (IdCl == "")
+            if ((For_name.Text != "") && (Name.Text != "") && (Last_name.Text != "") && (Coefficient.Text != "") && (Amount_of_deals.Text != ""))
             {
-                Realtor realtor = new Realtor()
+                string IdCl = Id_clients.Text;
+                if (IdCl == "")
                 {
-                    for_name = For_name.Text,
-                    name = Name.Text,
-                    last_name = Last_name.Text,
-                    coefficient = Convert.ToDouble(Coefficient.Text),
-                    amount_of_deals = Convert.ToInt32(Amount_of_deals.Text),
-                    id_clients = null
-                };
+                    Realtor realtor = new Realtor()
+                    {
+                        for_name = For_name.Text,
+                        name = Name.Text,
+                        last_name = Last_name.Text,
+                        coefficient = Convert.ToDouble(Coefficient.Text),
+                        amount_of_deals = Convert.ToInt32(Amount_of_deals.Text),
+                        id_clients = null
+                    };
 
-                ConnectOdb.conObj.Realtor.Add(realtor);
-                ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Риэлтор добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ConnectOdb.conObj.Realtor.Add(realtor);
+                    ConnectOdb.conObj.SaveChanges();
+                    MessageBox.Show("Риэлтор добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                FrameObj.frameMain.GoBack();
+                    FrameObj.frameMain.GoBack();
+                }
+                else
+                {
+                    Realtor realtor = new Realtor()
+                    {
+                        for_name = For_name.Text,
+                        name = Name.Text,
+                        last_name = Last_name.Text,
+                        coefficient = Convert.ToDouble(Coefficient.Text),
+                        amount_of_deals = Convert.ToInt32(Amount_of_deals.Text),
+                        id_clients = Convert.ToInt32(IdCl)
+                    };
+
+                    ConnectOdb.conObj.Realtor.Add(realtor);
+                    ConnectOdb.conObj.SaveChanges();
+                    MessageBox.Show("Риэлтор добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    FrameObj.frameMain.GoBack();
+                }
             }
             else
             {
-                Realtor realtor = new Realtor()
-                {
-                    for_name = For_name.Text,
-                    name = Name.Text,
-                    last_name = Last_name.Text,
-                    coefficient = Convert.ToDouble(Coefficient.Text),
-                    amount_of_deals = Convert.ToInt32(Amount_of_deals.Text),
-                    id_clients = Convert.ToInt32(IdCl)
-                };
-
-                ConnectOdb.conObj.Realtor.Add(realtor);
-                ConnectOdb.conObj.SaveChanges();
-                MessageBox.Show("Риэлтор добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                FrameObj.frameMain.GoBack();
+                MessageBox.Show("Заполните все поля!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

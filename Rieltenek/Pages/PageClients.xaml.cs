@@ -52,12 +52,21 @@ namespace Rieltenek.Pages
 
         private void btnUpdateClient_Click(object sender, RoutedEventArgs e)
         {
-            int id = ((Client)ListClients.SelectedItem).id_client;
+            
 
-            ClassIdObj.Id_client = id;
+            if(ListClients.SelectedItem != null)
+            {
+                int id = ((Client)ListClients.SelectedItem).id_client;
 
-            Client client = ConnectOdb.conObj.Client.Where(c => c.id_client == id).FirstOrDefault();
-            FrameObj.frameMain.Navigate(new PageUpdateClient(client));
+                ClassIdObj.Id_client = id;
+
+                Client client = ConnectOdb.conObj.Client.Where(c => c.id_client == id).FirstOrDefault();
+                FrameObj.frameMain.Navigate(new PageUpdateClient(client));
+            }
+            else
+            {
+                MessageBox.Show("Выберите клиента!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }

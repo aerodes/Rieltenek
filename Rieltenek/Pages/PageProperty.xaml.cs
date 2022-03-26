@@ -46,9 +46,31 @@ namespace Rieltenek.Pages
 
         private void btnUpdateProperty_Click(object sender, RoutedEventArgs e)
         {
-            ClassIdObj.Id_property = ((Property)ListProperty.SelectedItem).id_property;
-            Property property = ConnectOdb.conObj.Property.Where(x => x.id_property == ClassIdObj.Id_property).FirstOrDefault();
-            FrameObj.frameMain.Navigate(new PageUpdateProperty(property));
+            if (ListProperty.SelectedValue != null)
+            {
+                ClassIdObj.Id_property = ((Property)ListProperty.SelectedItem).id_property;
+                Property property = ConnectOdb.conObj.Property.Where(x => x.id_property == ClassIdObj.Id_property).FirstOrDefault();
+                FrameObj.frameMain.Navigate(new PageUpdateProperty(property));
+            }
+            else
+            {
+                MessageBox.Show("Выберите недвижимость!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void btnViewProperty_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListProperty.SelectedValue != null)
+            {
+                int id = ((Property)ListProperty.SelectedItem).id_property;
+                ClassIdObj.Id_property = id;
+                Photo photo = ConnectOdb.conObj.Photo.Where(x => x.id_photo == id).FirstOrDefault();
+                FrameObj.frameMain.Navigate(new PageViewProperty(photo));
+            }
+            else
+            {
+                MessageBox.Show("Выберите недвижимость!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
     }
 }
