@@ -62,9 +62,8 @@ namespace Rieltenek.Pages
         {
             if (ListProperty.SelectedValue != null)
             {
-                int id = ((Property)ListProperty.SelectedItem).id_property;
-                ClassIdObj.Id_property = id;
-                Photo photo = ConnectOdb.conObj.Photo.Where(x => x.id_photo == id).FirstOrDefault();
+                ClassIdObj.Id_property = ((Property)ListProperty.SelectedItem).id_property;
+                Photo photo = ConnectOdb.conObj.Photo.Where(x => x.id_photo == ClassIdObj.Id_property).FirstOrDefault();
                 FrameObj.frameMain.Navigate(new PageViewProperty(photo));
             }
             else
